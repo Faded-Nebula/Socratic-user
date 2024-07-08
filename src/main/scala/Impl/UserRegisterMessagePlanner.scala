@@ -24,7 +24,7 @@ case class UserRegisterMessagePlanner(
 
     checkUserExists.flatMap { exists =>
       if (exists) {
-        "Already registered"
+        IO.pure("Already registered")
       } else {
         writeDB(
           s"INSERT INTO ${schemaName}.user_info (user_name, password, sur_name, last_name, institute, expertise, email) VALUES (?, ?, ?, ?, ?, ?, ?)",

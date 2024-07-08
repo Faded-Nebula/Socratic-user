@@ -20,12 +20,12 @@ object Routes:
             m.fullPlan.map(_.asJson.toString)
           }
       case "UserRegisterMessage" =>
-        IO(decode[UserRegisterMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for RegisterMessage")))
+        IO(decode[UserRegisterMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserRegisterMessage")))
           .flatMap{m=>
             m.fullPlan.map(_.asJson.toString)
           }
       case "UserReadInfoMessage" =>
-        IO(decode[UserReadInfoMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for RegisterMessage")))
+        IO(decode[UserReadInfoMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserReadInfoMessage")))
           .flatMap{m=>
             m.fullPlan.map(_.asJson.toString)
           }

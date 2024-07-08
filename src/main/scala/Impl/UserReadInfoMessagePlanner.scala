@@ -12,11 +12,11 @@ import Shared.UserInfo
 import io.circe.generic.auto.*
 
 
-case class UserReadInfoMessagePlanner(property: String,override val planContext: PlanContext) extends Planner[String]:
+case class UserReadInfoMessagePlanner(userName: String, property: String, override val planContext: PlanContext) extends Planner[String]:
   override def plan(using PlanContext): IO[String] = {
     // Search the User Info on the db
     readDBString(
       s"SELECT ${property} FROM ${schemaName}.user_info WHERE user_name = ?",
-      List(SqlParameter("String", property))
+      List(SqlParameter("String", userName))
     )
   }

@@ -20,7 +20,7 @@ object ServiceCenter {
     doctorServiceCode    ->  "医生（Doctor）",
     patientServiceCode   ->  "病人（Patient）",
     portalServiceCode    ->  "门户（Portal）",
-    userServiceCode      ->  "用户（User）",
+    userServiceCode      ->  "用户（UserDB）",
     taskServiceCode      ->  "任务（Task）",
   )
 
@@ -29,7 +29,7 @@ object ServiceCenter {
     "Doctor" ->         "127.0.0.1:10002",
     "Patient" ->        "127.0.0.1:10003",
     "Portal" ->         "127.0.0.1:10004",
-    "User" ->           "127.0.0.1:10005",
+    "UserDB" ->         "127.0.0.1:10005",
     "Task" ->           "127.0.0.1:10006",
   )
 }
