@@ -1,3 +1,3 @@
 package APIs.UserAPI
-
-case class UserRegisterMessage(userName:String, password:String) extends UserMessage[String]
+import Shared.UserInfo
+case class UserRegisterMessage(userInfo: UserInfo) extends UserMessage[String]
