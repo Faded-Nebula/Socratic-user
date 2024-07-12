@@ -26,6 +26,7 @@ case class UserRegisterMessagePlanner(
       if (exists) {
         IO.pure("Already registered")
       } else {
+        RegisterMessage(userName, password, "user").send
         writeDB(
           s"INSERT INTO ${schemaName}.user_info (user_name, password, sur_name, last_name, institute, expertise, email) VALUES (?, ?, ?, ?, ?, ?, ?)",
           List(
