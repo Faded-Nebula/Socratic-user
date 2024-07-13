@@ -1,3 +1,5 @@
 package APIs.TaskAPI
 
-case class TaskQueryMessage(userName:String, taskName:String) extends TaskMessage[String]
+import java.io.InputStream
+
+case class TaskQueryMessage(userName:String, taskName:String, periodicalName:String, pdfBase64:String) extends TaskMessage[String]

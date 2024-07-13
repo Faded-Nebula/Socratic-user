@@ -13,7 +13,7 @@ import org.http4s.client.Client
 import org.http4s.ember.client.EmberClientBuilder
 import org.typelevel.log4cats.slf4j.{Slf4jFactory, Slf4jLogger}
 import org.typelevel.log4cats.{Logger, LoggerFactory}
-
+import java.io.InputStream
 import scala.concurrent.duration.DurationInt
 
 implicit val loggerFactory: LoggerFactory[IO] = Slf4jFactory.create[IO]
@@ -52,6 +52,7 @@ object API {
         IO(_)
       }
     }
+  
 
   private var client: Option[Client[IO]] = None
 

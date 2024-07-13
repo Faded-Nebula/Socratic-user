@@ -29,6 +29,11 @@ object Routes:
           .flatMap{m=>
             m.fullPlan.map(_.asJson.toString)
           }
+      case "UserSubmissionMessage" =>
+        IO(decode[UserSubmissionMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserReadInfoMessage")))
+          .flatMap{m=>
+            m.fullPlan.map(_.asJson.toString)
+          }
       case _ =>
         IO.raiseError(new Exception(s"Unknown type: $messageType"))
     }

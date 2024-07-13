@@ -5,6 +5,7 @@ import io.circe.generic.auto.*
 import Common.API.{PlanContext, Planner}
 import Common.DBAPI.{writeDB, *}
 import Common.Object.{ParameterList, SqlParameter}
+import APIs.UserManagementAPI.RegisterMessage
 import Shared.UserInfo
 import Common.ServiceUtils.schemaName
 import cats.effect.IO
@@ -26,7 +27,7 @@ case class UserRegisterMessagePlanner(
       if (exists) {
         IO.pure("Already registered")
       } else {
-        RegisterMessage(userName, password, "user").send
+        RegisterMessage(userInfo.userName, userInfo.password, "user").send
         writeDB(
           s"INSERT INTO ${schemaName}.user_info (user_name, password, sur_name, last_name, institute, expertise, email) VALUES (?, ?, ?, ?, ?, ?, ?)",
           List(
