@@ -27,19 +27,21 @@ case class UserRegisterMessagePlanner(
       if (exists) {
         IO.pure("Already registered")
       } else {
-        RegisterMessage(userInfo.userName, userInfo.password, "user").send
-        writeDB(
-          s"INSERT INTO ${schemaName}.user_info (user_name, password, sur_name, last_name, institute, expertise, email) VALUES (?, ?, ?, ?, ?, ?, ?)",
-          List(
-            SqlParameter("String", userInfo.userName),
-            SqlParameter("String", userInfo.password),
-            SqlParameter("String", userInfo.surName),
-            SqlParameter("String", userInfo.lastName),
-            SqlParameter("String", userInfo.institute),
-            SqlParameter("String", userInfo.expertise),
-            SqlParameter("String", userInfo.email)
+        for {
+          _ <- RegisterMessage(userInfo.userName, userInfo.password, "user").send
+          _ <- writeDB(
+            s"INSERT INTO ${schemaName}.user_info (user_name, password, sur_name, last_name, institute, expertise, email) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            List(
+              SqlParameter("String", userInfo.userName),
+              SqlParameter("String", userInfo.password),
+              SqlParameter("String", userInfo.surName),
+              SqlParameter("String", userInfo.lastName),
+              SqlParameter("String", userInfo.institute),
+              SqlParameter("String", userInfo.expertise),
+              SqlParameter("String", userInfo.email)
+            )
           )
-        ).map(_ => "OK")
+        } yield "OK"
       }
     }
   }
