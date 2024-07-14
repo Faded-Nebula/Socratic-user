@@ -23,16 +23,16 @@ case class UserEditProfilePhotoMessagePlanner(userName:String, Base64Image: Stri
           writeDB(
             s"UPDATE ${schemaName}.user_photo SET profile_photo = ? WHERE user_name = ?",
           List(
-            SqlParameter("String", Base64Image),
             SqlParameter("String", userName),
+            SqlParameter("String", Base64Image)
           )
         )
       } else {
           writeDB(
             s"INSERT INTO ${schemaName}.user_photo (user_name, profile_photo) VALUES (?, ?)",
             List(
-              SqlParameter("String", Base64Image),
               SqlParameter("String", userName),
+              SqlParameter("String", Base64Image),
             )
           ).map( _ => "OK")
       }

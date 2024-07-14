@@ -17,7 +17,7 @@ import java.io.InputStream
 
 case class UserSubmissionMessagePlanner(userName: String, taskName: String, periodicalName: String, pdfBase64: String, researchArea:String, Abstract:String, TLDR:String, override val planContext: PlanContext) extends Planner[String]:
   override def plan(using PlanContext): IO[String] = {
-    val checkTaskConflict = TaskQueryMessage(userName, taskName, periodicalName, pdfBase64, researchArea, Abstract, TLDR).send
+    val checkTaskConflict = TaskQueryMessage(userName, taskName, periodicalName, pdfBase64).send
     checkTaskConflict.flatMap { conflict =>
       if (conflict == "Conflict") {
         IO.pure("Task Name Conflict")
