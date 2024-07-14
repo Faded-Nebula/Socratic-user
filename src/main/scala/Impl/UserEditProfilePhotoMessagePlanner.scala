@@ -20,13 +20,13 @@ case class UserEditProfilePhotoMessagePlanner(userName:String, Base64Image: Stri
 
     checkPhotoExists.flatMap { exists =>
       if (exists) {
-          writeDB(
-            s"UPDATE ${schemaName}.user_photo SET profile_photo = ? WHERE user_name = ?",
+        writeDB(
+          s"UPDATE ${schemaName}.user_photo SET profile_photo = ? WHERE user_name = ?",
           List(
             SqlParameter("String", userName),
             SqlParameter("String", Base64Image)
           )
-        )
+        ).map(_ => "OK")
       } else {
           writeDB(
             s"INSERT INTO ${schemaName}.user_photo (user_name, profile_photo) VALUES (?, ?)",
