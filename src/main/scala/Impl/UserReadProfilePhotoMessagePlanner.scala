@@ -25,7 +25,10 @@ case class UserReadProfilePhotoMessagePlanner(userName: String, override val pla
           List(SqlParameter("String", userName))
         )
       } else {
-        IO.pure("Not Initialized")
+        readDBString(
+          s"SELECT profile_photo FROM ${schemaName}.user_photo WHERE user_name = ?",
+          List(SqlParameter("String", "default"))
+        )
       }
     }
   }

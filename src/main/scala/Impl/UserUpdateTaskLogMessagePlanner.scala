@@ -11,5 +11,5 @@ import Common.ServiceUtils.schemaName
 import cats.effect.IO
 import io.circe.generic.auto.*
 
-case class UserUpdateTaskLogMessagePlanner()
+case class UserUpdateTaskLogMessagePlanner(userName: String, taskName: String)
   
