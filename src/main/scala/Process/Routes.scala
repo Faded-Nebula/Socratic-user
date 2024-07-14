@@ -30,7 +30,17 @@ object Routes:
             m.fullPlan.map(_.asJson.toString)
           }
       case "UserSubmissionMessage" =>
-        IO(decode[UserSubmissionMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserReadInfoMessage")))
+        IO(decode[UserSubmissionMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserSubmissionMessage")))
+          .flatMap{m=>
+            m.fullPlan.map(_.asJson.toString)
+          }
+      case "UserEditProfilePhotoMessage" =>
+        IO(decode[UserEditProfilePhotoMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserEditProfilePhotoMessage")))
+          .flatMap{m=>
+            m.fullPlan.map(_.asJson.toString)
+          }
+      case "UserReadProfilePhotoMessage" =>
+        IO(decode[UserReadProfilePhotoMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserReadProfilePhotoMessage")))
           .flatMap{m=>
             m.fullPlan.map(_.asJson.toString)
           }
