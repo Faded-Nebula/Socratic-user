@@ -23,7 +23,10 @@ def readFileToString(filePath: String): String = {
 
 object Init {
   def init(config:ServerConfig):IO[Unit]=
-    val defaultImage = readFileToString("/Shared/default_profile.txt")
+    val currentDir = System.getProperty("user.dir")
+    val relativePath = s"src/main/scala/Shared/default_profile.txt"
+    val fullPath = s"$currentDir/$relativePath"
+    val defaultImage = readFileToString(fullPath)
     given PlanContext=PlanContext(traceID = TraceID(UUID.randomUUID().toString),0)
     for{
       _ <- API.init(config.maximumClientConnection)
