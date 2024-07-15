@@ -1,3 +1,3 @@
 package APIs.UserAPI
 
-case class UserEditInfoMessage(userName:String, property:String) extends UserMessage[String]
+case class UserEditInfoMessage(userName:String, property:String, updateValue: String) extends UserMessage[String]
