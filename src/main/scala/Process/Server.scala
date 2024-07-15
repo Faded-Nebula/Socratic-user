@@ -10,7 +10,6 @@ import org.http4s.implicits.*
 import org.http4s.server.middleware.CORS
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.{Slf4jFactory, Slf4jLogger}
-import org.http4s.client.Client
 
 import java.nio.channels.ClosedChannelException
 import scala.concurrent.duration.*
