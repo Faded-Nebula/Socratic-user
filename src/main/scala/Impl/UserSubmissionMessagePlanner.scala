@@ -23,7 +23,7 @@ case class UserSubmissionMessagePlanner(userName: String, taskName: String, peri
       if (conflict == "Conflict") {
         IO.pure("Task Name Conflict")
       } else {
-        AllocateReviewerMessage(userName, periodicalName).send
+        AllocateReviewerMessage(taskName, periodicalName).send
       }.map(_ => "OK")
     }
   }
