@@ -44,11 +44,6 @@ object Routes:
           .flatMap{m=>
             m.fullPlan.map(_.asJson.toString)
           }
-      case "CheckUserExistsMessage" =>
-        IO(decode[CheckUserExistsMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for CheckUserExistsMessage")))
-          .flatMap{m=>
-            m.fullPlan.map(_.asJson.toString)
-          }
       case "UserEditInfoMessage" =>
         IO(decode[UserEditInfoMessagePlanner](str).getOrElse(throw new Exception("Invalid JSON for UserEditInfoMessage")))
           .flatMap{m=>

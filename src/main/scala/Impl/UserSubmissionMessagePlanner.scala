@@ -24,9 +24,6 @@ case class UserSubmissionMessagePlanner(userName: String, taskName: String, peri
         IO.pure("Task Name Conflict")
       } else {
         AllocateReviewerMessage(userName, periodicalName).send
-        writeDB(s"INSERT INTO ${schemaName}.user_task (user_name, task_name) VALUES (?, ?)",
-          List(SqlParameter("String", userName), SqlParameter("String", taskName)
-          ))
       }.map(_ => "OK")
     }
   }
