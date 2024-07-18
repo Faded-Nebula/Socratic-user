@@ -9,6 +9,7 @@ import Common.DBAPI.{writeDB, *}
 import Common.Object.{ParameterList, SqlParameter}
 import Common.ServiceUtils.schemaName
 import APIs.TaskAPI.TaskQueryMessage
+import APIs.EditorAPI.AllocateReviewerMessage
 import cats.effect.IO
 import io.circe.generic.auto.*
 
@@ -22,6 +23,7 @@ case class UserSubmissionMessagePlanner(userName: String, taskName: String, peri
       if (conflict == "Conflict") {
         IO.pure("Task Name Conflict")
       } else {
+        AllocateReviewerMessage(userName, periodicalName).send
         writeDB(s"INSERT INTO ${schemaName}.user_task (user_name, task_name) VALUES (?, ?)",
           List(SqlParameter("String", userName), SqlParameter("String", taskName)
           ))
