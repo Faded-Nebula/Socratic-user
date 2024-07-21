@@ -11,6 +11,7 @@ import Common.ServiceUtils.schemaName
 import cats.effect.IO
 import io.circe.generic.auto.*
 import APIs.UserManagementAPI.CheckUserExistsMessage
+import Shared.PasswordHasher.hashPassword
 
 
 case class UserRegisterMessagePlanner(
@@ -25,8 +26,9 @@ case class UserRegisterMessagePlanner(
       if (exists) {
         IO.pure("Already registered")
       } else {
+        val (passwordHash, salt) = hashPassword(password)
         for {
-          _ <- RegisterMessage(userInfo.userName, password, "user").send
+          _ <- RegisterMessage(userInfo.userName, passwordHash, salt, "user").send
           _ <- writeDB(
             s"INSERT INTO ${schemaName}.user_info (user_name, sur_name, last_name, institute, expertise, email) VALUES (?, ?, ?, ?, ?, ?)",
             List(
